@@ -1,7 +1,7 @@
 ﻿@model Levelnis.Learning.AutofacExamples.Web.CommandQuery.ViewModels.SignInViewModel
 
 @{
-    ViewBag.Title = "SignIn";
+    ViewBag.Title = "Levelnis Learning Series: Sign In Example";
 }
 
 <div class="row">
@@ -9,9 +9,12 @@
         @using (Html.BeginForm("SignIn", "Security", FormMethod.Post, new { name = "signInForm", role = "form" }))
         {
             <h2>Sign in</h2>
-            <p>Here's a quick example that shows the dependencies are hooked up in this project.<br/>
-                Sign in with a username of "dave" and any password. You'll get redirected to the index page (but nothing else will happen!)<br/>
-                Sign in with any other details and you'll see an error message. That's it!</p>
+            <p>Here's a quick example that shows the dependencies are hooked up in this project. Feel free to browse around and use the code as you see fit :)</p>
+            <ul>
+                <li>Sign in with a username of <strong>"dave"</strong> and any password. You'll get redirected to the index page (but nothing else will happen!)</li>
+                <li>Sign in with any other details and you'll see an error message.</li>
+            </ul>
+            <p>That's it! There's no real signing in taking place...</p>
             <div id="SignInError" class="alert alert-danger">@Model.SignInError</div>
             <div class="form-group">
                 <div class="input-group">
