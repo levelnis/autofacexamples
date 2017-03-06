@@ -8,20 +8,22 @@ namespace Levelnis.Learning.AutofacExamples.Web.Controllers
 
     public class SecurityController : Controller
     {
-        private readonly IViewModelFactory<bool, SignInViewModel> viewModelFactory;
+        private readonly IViewModelFactory<bool, SignInViewModel> signInViewModelFactory;
+        private readonly IViewModelFactory<RegisterViewModel> registerViewModelFactory;
         private readonly IMembershipProvider membershipProvider;
         private readonly ILogger logger;
 
-        public SecurityController(IViewModelFactory<bool, SignInViewModel> viewModelFactory, IMembershipProvider membershipProvider, ILogger logger)
+        public SecurityController(IViewModelFactory<bool, SignInViewModel> signInViewModelFactory, IViewModelFactory<RegisterViewModel> registerViewModelFactory, IMembershipProvider membershipProvider, ILogger logger)
         {
-            this.viewModelFactory = viewModelFactory;
+            this.signInViewModelFactory = signInViewModelFactory;
+            this.registerViewModelFactory = registerViewModelFactory;
             this.membershipProvider = membershipProvider;
             this.logger = logger;
         }
 
         public ActionResult SignIn()
         {
-            var model = viewModelFactory.Create(true);
+            var model = signInViewModelFactory.Create(true);
             return View(model);
         }
 
@@ -38,6 +40,24 @@ namespace Levelnis.Learning.AutofacExamples.Web.Controllers
 
             model.SignInError = "Your credentials were not recognised. Please try again.";
             return View(model);
+        }
+
+        public ActionResult Register()
+        {
+            var model = registerViewModelFactory.Create();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Register(RegisterViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model = registerViewModelFactory.Create();
+                return View(model);
+            }
+
+            return RedirectToAction("SignIn");
         }
     }
 }

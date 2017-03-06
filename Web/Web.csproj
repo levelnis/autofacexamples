@@ -142,7 +142,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="CommandQuery\Factories\IViewModelFactory.cs" />
+    <Compile Include="CommandQuery\Factories\RegisterViewModelFactory.cs" />
     <Compile Include="CommandQuery\Factories\SignInViewModelFactory.cs" />
+    <Compile Include="CommandQuery\ViewModels\RegisterViewModel.cs" />
     <Compile Include="CommandQuery\ViewModels\SignInViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
@@ -208,6 +210,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Security\SignIn.cshtml" />
+    <Content Include="Views\Security\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

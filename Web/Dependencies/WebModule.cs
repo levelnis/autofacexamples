@@ -13,7 +13,7 @@
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(typeof(WebModule).Assembly)
-                .Where(t => t.IsClosedTypeOf(typeof(IViewModelFactory<,>)))
+                .Where(t => t.IsClosedTypeOf(typeof(IViewModelFactory<>)) || t.IsClosedTypeOf(typeof(IViewModelFactory<,>)))
                 .AsImplementedInterfaces().InstancePerLifetimeScope();
 
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().InstancePerLifetimeScope();
