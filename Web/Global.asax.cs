@@ -8,8 +8,10 @@
     using Autofac.Integration.Mvc;
     using Autofac.Integration.WebApi;
     using Dependencies;
+    using FluentValidation.Mvc;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
+    using Validators;
 
     public class WebApiApplication : System.Web.HttpApplication
     {
@@ -55,6 +57,11 @@
         {
             var mvcResolver = new AutofacDependencyResolver(container);
             DependencyResolver.SetResolver(mvcResolver);
+
+            FluentValidationModelValidatorProvider.Configure(provider =>
+            {
+                provider.ValidatorFactory = new AutofacValidatorFactory(container);
+            });
         }
     }
 }

@@ -10,13 +10,16 @@ namespace Levelnis.Learning.AutofacExamples.Web.Controllers
     {
         private readonly IViewModelFactory<bool, SignInViewModel> signInViewModelFactory;
         private readonly IViewModelFactory<RegisterViewModel> registerViewModelFactory;
+        private readonly IViewModelFactory<RegisterFluentViewModel> registerFluentViewModelFactory;
         private readonly IMembershipProvider membershipProvider;
         private readonly ILogger logger;
 
-        public SecurityController(IViewModelFactory<bool, SignInViewModel> signInViewModelFactory, IViewModelFactory<RegisterViewModel> registerViewModelFactory, IMembershipProvider membershipProvider, ILogger logger)
+        public SecurityController(IViewModelFactory<bool, SignInViewModel> signInViewModelFactory, IViewModelFactory<RegisterViewModel> registerViewModelFactory,
+            IViewModelFactory<RegisterFluentViewModel> registerFluentViewModelFactory, IMembershipProvider membershipProvider, ILogger logger)
         {
             this.signInViewModelFactory = signInViewModelFactory;
             this.registerViewModelFactory = registerViewModelFactory;
+            this.registerFluentViewModelFactory = registerFluentViewModelFactory;
             this.membershipProvider = membershipProvider;
             this.logger = logger;
         }
@@ -51,13 +54,35 @@ namespace Levelnis.Learning.AutofacExamples.Web.Controllers
         [HttpPost]
         public ActionResult Register(RegisterViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                model = registerViewModelFactory.Create();
-                return View(model);
+                // do something here with the model, like saving the user details in the data store
+
+                return RedirectToAction("SignIn");
             }
 
-            return RedirectToAction("SignIn");
+            model = registerViewModelFactory.Create();
+            return View(model);
+        }
+
+        public ActionResult RegisterFluent()
+        {
+            var model = registerFluentViewModelFactory.Create();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult RegisterFluent(RegisterFluentViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // do something here with the model, like saving the user details in the data store
+
+                return RedirectToAction("SignIn");
+            }
+
+            model = registerFluentViewModelFactory.Create();
+            return View(model);
         }
     }
 }
