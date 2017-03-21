@@ -1,0 +1,70 @@
+﻿@model Levelnis.Learning.AutofacExamples.Web.CommandQuery.ViewModels.RegisterViewModel
+
+@{
+    ViewBag.Title = "Levelnis Learning Series: Register Validation Example";
+}
+
+@section headstyles{
+    <style>
+        .field-validation-error {
+            color: #a94442;
+        }
+    </style>
+}
+
+@using (Html.BeginForm("Register", "Security", FormMethod.Post, new { name = "registerForm", role = "form" }))
+{
+    <div class="row">
+        <div class="col-xs-12 col-sm-8">
+            <h2>Register</h2>
+            <p>Here's a quick example showing how to hook up validation using DataAnnotations. Feel free to browse around and use the code as you see fit :)</p>
+            @Html.ValidationSummary(true, "There were some issues with the data you entered. Please review the issues below and try again:", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-4">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Username, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Username)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.EmailAgain, "Email (again)", new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.EmailAgain, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EmailAgain)
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-4">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.PasswordAgain, "Password (again)", new { @class = "control-label" })
+                @Html.PasswordFor(m => m.PasswordAgain, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PasswordAgain)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" name="btnRegister" id="btnRegister" class="btn btn-primary pull-right">Register</button>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script>
+        (function ($) {
+            $('.field-validation-error').each(function () {
+                $(this).parent().addClass('has-error');
+            });
+        })(jQuery);
+    </script>
+}

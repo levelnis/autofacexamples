@@ -4,4 +4,9 @@
     {
         TViewModel Create(TInput input);
     }
+
+    public interface IViewModelFactory<out TViewModel>
+    {
+        TViewModel Create();
+    }
 }

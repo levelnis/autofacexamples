@@ -5,6 +5,7 @@
     using Autofac;
     using Autofac.Integration.Mvc;
     using CommandQuery.Factories;
+    using FluentValidation;
     using Infrastructure;
     using Module = Autofac.Module;
 
@@ -13,7 +14,11 @@
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(typeof(WebModule).Assembly)
-                .Where(t => t.IsClosedTypeOf(typeof(IViewModelFactory<,>)))
+                .Where(t => t.IsClosedTypeOf(typeof(IViewModelFactory<>)) || t.IsClosedTypeOf(typeof(IViewModelFactory<,>)))
+                .AsImplementedInterfaces().InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(typeof(WebModule).Assembly)
+                .Where(t => t.IsClosedTypeOf(typeof(IValidator<>)))
                 .AsImplementedInterfaces().InstancePerLifetimeScope();
 
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().InstancePerLifetimeScope();
