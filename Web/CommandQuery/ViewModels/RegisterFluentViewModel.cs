@@ -7,5 +7,10 @@
         public string EmailAgain { get; set; }
         public string Password { get; set; }
         public string PasswordAgain { get; set; }
+        public string BlogUrl { get; set; }
+        public string Comments { get; set; }
+        public bool NoComment { get; set; }
+        public string OtherComments { get; set; }
+        public bool NoOtherComment { get; set; }
     }
 }
