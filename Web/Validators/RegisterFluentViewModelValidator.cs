@@ -39,7 +39,6 @@
 
         private static ValidationFailure OtherCommentsMustBeValid(RegisterFluentViewModel model, ValidationContext<RegisterFluentViewModel> context)
         {
-            context.Selector
             if (model.NoOtherComment) return null;
             return model.OtherComments != null && model.OtherComments.Length >= 50 ? null : 
                 new ValidationFailure("OtherComments", "Please enter at least 50 characters of comments. If you have nothing to say, please check the checkbox.");
